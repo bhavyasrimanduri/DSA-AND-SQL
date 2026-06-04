@@ -1,21 +1,23 @@
 class Solution {
 public:
     double myPow(double x, int n) {
-        double ans=1.0;
-        long nn=n;
-        if(nn < 0) nn = -1*nn;
-        while(nn > 0){
-            if(nn % 2 == 1){
-                ans = ans*x;
-                nn=nn-1;
-            }
-            else{
-                x = x*x;
-                nn=nn/2;
-            }
-        }
+        if(n==0) return 1.0;
+        if(x==0) return 0.0;
+        if(x==1) return 1.0;
+        if(x==-1 && n%2==0) return 1.0;
+        if(x==-1 && n%2!=0) return -1.0;
+        long binform = n;
+        double ans=1;
         if(n < 0){
-            ans = (double)1.0/(double)ans;
+            x = 1/x;
+            binform=-binform;
+        }
+        while(binform>0){
+            if(binform % 2==1){
+                ans *= x;
+            }
+            x *= x;
+            binform /=2;
         }
         return ans;
     }
