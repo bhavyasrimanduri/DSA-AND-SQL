@@ -15,9 +15,7 @@ public:
         unordered_map<int, vector<pair<int,int>>> adj;
         vector<bool> visited(n,false);
         for(auto &vec: roads){
-            int u=vec[0];
-            int v=vec[1];
-            int d=vec[2];
+            auto [u,v,d] = tuple<int,int,int>{vec[0],vec[1],vec[2]};
             adj[u].push_back({v,d});
             adj[v].push_back({u,d});
         }
