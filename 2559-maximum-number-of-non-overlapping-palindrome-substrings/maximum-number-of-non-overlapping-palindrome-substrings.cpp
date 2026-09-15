@@ -14,15 +14,19 @@ public:
     }
     int maxPalindromes(string s, int k) {
         int n=s.size();
-        vector<int> dp(n+1,0);
-        for(int i=1;i<=n;i++){
-            dp[i]=dp[i-1];
-            for(int j=0;j<i;j++){
-                if(i-j>=k && palindrome(s,j,i-1)){
-                    dp[i]=max(dp[i],dp[j]+1);
+        int start=0;
+        int count =0;
+        for(int end=k-1;end < n;end++){
+            bool found = false;
+            for(int j=start;j<=end-k+1;j++){
+                if(palindrome(s,j,end)){
+                    count++;
+                    start=end+1;
+                    found= true;
+                    break;
                 }
             }
-        }  
-        return dp[n]; 
+        }
+        return count;
     }
 };
