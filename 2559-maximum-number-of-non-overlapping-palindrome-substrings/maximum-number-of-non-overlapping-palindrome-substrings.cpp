@@ -16,15 +16,20 @@ public:
         int n=s.size();
         int start=0;
         int count =0;
-        for(int end=k-1;end < n;end++){
+        for(int i=0;i<n;){
             bool found = false;
-            for(int j=start;j<=end-k+1;j++){
-                if(palindrome(s,j,end)){
-                    count++;
-                    start=end+1;
-                    found= true;
-                    break;
-                }
+            if(i+k<=n && palindrome(s,i,i+k-1)){
+                count++;
+                found=true;
+                i += k;
+            }
+            else if(i+k+1<=n && palindrome(s,i,i+k)){
+                count++;
+                found=true;
+                i += k+1;
+            }
+            if(!found){
+                i++;
             }
         }
         return count;
