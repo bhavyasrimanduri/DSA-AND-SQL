@@ -13,25 +13,22 @@ public:
         return true;
     }
     int maxPalindromes(string s, int k) {
-        int n=s.size();
-        int start=0;
-        int count =0;
-        for(int i=0;i<n; ){
-            bool found = false;
-            if(i+k<=n && palindrome(s,i,i+k-1)){
-                count++;
-                found=true;
-                i += k;
-            }
-            else if(i+k+1<=n && palindrome(s,i,i+k)){
-                count++;
-                found=true;
-                i += k+1;
-            }
-            if(!found){
-                i++;
+          int n = s.size();
+
+        vector<int> dp(n + 1, 0);
+
+        for (int i = 1; i <= n; i++) {
+            
+            dp[i] = dp[i - 1];
+
+            for (int j = 0; j < i; j++) {
+                
+                if (i - j >= k && palindrome(s, j, i - 1)) {
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }
             }
         }
-        return count;
+
+        return dp[n];
     }
 };
