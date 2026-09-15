@@ -16,7 +16,7 @@ public:
         int n=s.size();
         int start=0;
         int count =0;
-        for(int i=0;i<n;){
+        for(int i=0;i<n; ){
             bool found = false;
             if(i+k<=n && palindrome(s,i,i+k-1)){
                 count++;
